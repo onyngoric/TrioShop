@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"  rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'front/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'front/img/tm.png' %}">
+    <title>TRIO_MARKET</title>    
+</head>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color: #131212;">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            {% if username %}
+            <a class="navbar-brand me-2" href="{% url 'index' %}">            
+            <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="lazy"
+                style="margin-top: -1px;"
+            />&nbsp;&nbsp;
+            <b>TRIO MARKETPLACE</b>
+            </a>
+            {% else %}
+            <a class="navbar-brand me-2" href="{% url 'home' %}">            
+                <img
+                    src="{% static 'front/img/tm.png' %}"
+                    height="50"
+                    alt="Trio Logo"
+                    loading="lazy"
+                    style="margin-top: -1px;"
+                />&nbsp;&nbsp;
+                <b>TRIO MARKETPLACE</b>
+            </a>
+            {% endif %}
+
+        
+            <!-- Toggle button -->
+            <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            </button>
+        
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                </ul>
+                <!-- Left links -->
+        
+                <div class="d-flex align-items-center">                    
+                    
+                    <a  class="btn px-3 bt-sm" href="{% url 'active_post' %}" style="color:white; background-color:rgb(204, 104, 22);" role="button">
+                        <span style="font-size: x-small;">Post Ad</span>
+                    </a>
+                    {% if username %}                     
+                    <i class="btn-sm fa fa-user-circle dropdown-toggle px-3 me-2"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-mdb-dropdown-init
+                    data-mdb-ripple-init
+                    aria-expanded="false"
+                    aria-hidden="true" 
+                    style="font-size: 15px; color: rgb(204, 104, 22);"><em class="px-3 me-2">{{ username }}</em></i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
+                    </ul>
+                    {% else %}
+                    <a role="button" href="{% url 'login' %}" class="btn btn-link px-3 me-2">
+                        <span style="font-size: x-small;">Login</span>
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<body style="background-color: rgb(219, 212, 212);">
+    <div class="container">
+        <br><br>
+        <h2>Cookie Policy</h2><br>
+        <strong>Updated at 2022-04-22</strong><br><br>
+        
+        <h4>Definitions and key terms</h4>
+        To help explain things as clearly as possible in this Cookie Policy, every time any of these terms are referenced, are strictly defined as: <br>
+        
+        <strong>Cookie:</strong> small amount of data generated by a website and saved by your web browser. It is used to identify your browser, provide analytics, remember information about you such as your language preference or login information. <br>
+        
+        <strong>Company:</strong> when this policy mentions “Company,” “we,” “us,” or “our,” it refers to Trio Marketplace Corp, Toronto, Ontario that is responsible for your information under this Disclaimer. <br>
+        
+        <strong>Device: </strong>any internet connected device such as a phone, tablet, computer or any other device that can be used to visit Trio Marketplace and use the services. <br>
+        
+        <strong>Personal Data: </strong>any information that directly, indirectly, or in connection with other information — including a personal identification number — allows for the identification or identifiability of a natural person. <br>
+        
+        <strong>Service: </strong>refers to the service provided by Trio Marketplace as described in the relative terms (if available) and on this platform. <br>
+        
+        <strong>Third-party service: </strong>refers to advertisers, contest sponsors, promotional and marketing partners, and others who provide our content or whose products or services we think may interest you. <br>
+        
+        <strong>Website: </strong>Trio Marketplace."'s" site, which can be accessed via thishttps://triomarketplace.com/ <br>
+        
+        <strong>You: </strong>a person or entity that is registered with Trio Marketplace to use the Services. <br>
+        
+        <h4>Introduction</h4>
+        This Cookie Policy explains how Trio Marketplace and its affiliates (collectively "Trio Marketplace", "we", "us", and "ours"), use cookies and similar technologies to recognize you when you visit our website, including without limitationhttps://triomarketplace.ca/ and any related URLs, mobile or localized versions and related domains / sub-domains ("Websites"). It explains what these technologies are and why we use them, as well as the choices for how to control them.
+        
+        <h4>What is a cookie?</h4>
+        A cookie is a small text file that is stored on your computer or other internet connected device in order to identify your browser, provide analytics, remember information about you such as your language preference or login information. They're completely safe and can't be used to run programs or deliver viruses to your device.
+        
+       <h4>Why do we use cookies?</h4>
+        We use first party and/or third party cookies on our website for various purposes such as: <br>
+        
+        To facilitate the operation and functionality of our website; <br>
+        
+        To improve your experience of our website and make navigating around them quicker and easier; <br>
+        
+        To allow us to make a bespoke user experience for you and for us to understand what is useful or of interest to you; <br>
+        
+        To analyze how our website is used and how best we can customize it; <br>
+        
+        To identify future prospects and personalize marketing and sales interactions with it; <br>
+        
+        To facilitate the tailoring of online advertising to your interests. <br>
+        
+        <h4>What type of cookies does Trio Marketplace use?</h4>
+        Cookies can either be session cookies or persistent cookies. A session cookie expires automatically when you close your browser. A persistent cookie will remain until it expires or you delete your cookies. Expiration dates are set in the cookies themselves; some may expire after a few minutes while others may expire after multiple years. Cookies placed by the website you're visiting are called “first party cookies”.
+        
+        Strictly Necessary cookies are necessary for our website to function and cannot be switched off in our systems. They are essential in order to enable you to navigate around the website and use its features. If you remove or disable these cookies, we cannot guarantee that you will be able to use our website.
+        
+       <h4>We use the following types of cookies in our website:</h4>
+        
+        <h5>Essential Cookies</h5>
+        We use essential cookies to make our website work. These cookies are strictly necessary to enable core functionality such as security, network management, your cookie preferences and accessibility. Without them you wouldn't be able to use basic services. You may disable these by changing your browser settings, but this may affect how the Websites function.
+        
+        <h5>Performance and Functionality Cookies</h5>
+        These cookies are used to enhance the performance and functionality of our website but are non-essential to their use. However, without these cookies, certain functionality like videos may become unavailable or you would be required to enter your login details every time you visit the website as we would not be able to remember that you had logged in previously.
+        
+        <h5>Marketing Cookies</h5>
+        These account-based marketing cookies enable us to identify future prospects and personalize sales and marketing interactions with them.
+        
+        <h5>Analytics and Customization Cookies</h5>
+        These cookies collect information that is used to help us understand how our website is being used or how effective our marketing campaigns are, or to help us customize our website for you.
+        
+        We use cookies served by Google Analytics to collect limited data directly from end-user browsers to enable us to better understand your use of our website. Further information on how Google collects and uses this data can be found at:https://www.google.com/policies/privacy/partners/. You can opt-out of all Google supported analytics on our Websites by visiting: https://tools.google.com/dlpage/gaoptout.
+        
+        <h5>Advertising Cookies</h5>
+        These cookies collect information over time about your online activity on the website and other online services to make online advertisements more relevant and effective to you. This is known as interest-based advertising. They also perform functions like preventing the same ad from continuously reappearing and ensuring that ads are properly displayed for advertisers. Without cookies, it's really hard for an advertiser to reach its audience, or to know how many ads were shown and how many clicks they received.
+        
+        <h5>Social Media Cookies</h5>
+        These cookies are used when you share information using a social media sharing button or “like” button on our Site or you link your account or engage with our content on or through a social networking website such as Facebook, Twitter or Google+. The social network will record that you have done this. These cookies may also include certain code that has been placed on the platform to help track conversions from ads, optimize ads based on collected data, build targeted audiences for future ads, and remarket to qualified users who have already taken certain action on the platform.
+        
+        <h5>Third Party Cookies</h5>
+        Some cookies that have been set on our website are not set on a first party basis by Trio Marketplace. The Websites can be embedded with content from third parties to serve advertising. These third party service providers may set their own cookies on your web browser. Third party service providers control many of the performance and functionality, advertising, marketing and analytics cookies described above. We do not control the use of these third party cookies as cookies can only be accessed by the third party that originally set them.
+        
+        <h5>How you can manage cookies?</h5>
+        Most browsers allow you to control cookies through their 'settings' preferences. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience, since it will no longer be personalized to you. It may also stop you from saving customized settings like login information. Browser manufacturers provide help pages relating to cookie management in their products.
+        
+        Browser manufacturers provide help pages relating to cookie management in their products. Please see below for more information. <br>
+        
+        Google Chrome <br>
+        
+        Internet Explorer <br>
+        
+        Mozilla Firefox <br>
+        
+        Safari (Desktop) <br>
+        
+        Safari (Mobile) <br>
+        
+        Android Browser <br>
+        
+        Opera <br>
+        
+        Opera Mobile <br>
+        
+        <h4>Blocking and disabling cookies and similar technologies</h4>
+        Wherever you're located you may also set your browser to block cookies and similar technologies, but this action may block our essential cookies and prevent our website from functioning properly, and you may not be able to fully utilize all of its features and services. You should also be aware that you may also lose some saved information (e.g. saved login details, site preferences) if you block cookies on your browser. Different browsers make different controls available to you. Disabling a cookie or category of cookie does not delete the cookie from your browser, you will need to do this yourself from within your browser, you should visit your browser's help menu for more information.
+        
+        <h4>Changes To Our Cookie Policy</h4>
+        We may change our Service and policies, and we may need to make changes to this Cookie Policy so that they accurately reflect our Service and policies. Unless otherwise required by law, we will notify you (for example, through our Service) before we make changes to this Cookie Policy and give you an opportunity to review them before they go into effect. Then, if you continue to use the Service, you will be bound by the updated Cookie Policy. If you do not want to agree to this or any updated Cookie Policy, you can delete your account.
+        
+        <h4>Your Consent</h4>
+        By using our website, registering an account, or making a purchase, you hereby consent to our Cookie Policy and agree to its terms.
+        
+        <h4>Contact Us</h4>
+        Don't hesitate to contact us if you have any questions regarding this Disclaimer. <br>
+        
+        Via Email: triomarketplace@gmail.com <br>
+        
+        Via Phone number: +1 (800) 203-9305 <br>
+        
+        Via this Link:https://triomarketplace.com/ <br>
+    </div>
+</body><br><br><br><br>
+<!-- Footer -->
+<footer class="text-center text-lg-start text-muted" style="background-color: #131212; color: #ffffff;">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/Triomarketplace" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/MarketplaceTrio" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCkss9bFS7Wgi3m9yZvTtk1w" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.pinterest.ca/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-pinterest" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.tiktok.com/@triomarketplace" target="_blank" class="me-4 text-reset">
+            <img
+            src="{% static 'front/img/tiktok.png' %}"
+            height="15"
+            alt="Trio Logo"
+            loading="lazy"
+            style="margin-top: -1px;"
+            />
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="lazy"
+                style="margin-top: -1px;"
+                />Trio MarketPlace
+            </h6>
+            <p>
+                Trio Marketplace Corporation (TMP) is an Online Classified Advertisement website with a sole purpose of bringing a fresh look at the current industry standards. Trio Marketplace Corporation is a federal incorporation registered under the Canada Business Corporations Act (CBCA) with its headquarters in Toronto, Ontario.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              About Us
+            </h6>
+            <p>
+              <a href="{% url 'hiw' %}" class="text-reset">How it works</a>
+            </p>
+            <p>
+              <a href="{% url 'terms' %}" class="text-reset">Terms of Service</a>
+            </p>
+            <p>
+              <a href="{% url 'privacy' %}" class="text-reset">Privacy Policy</a>
+            </p>
+            <p>
+              <a href="{% url 'cookie' %}" class="text-reset">Cookie Policy</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Quick links
+            </h6>
+            <p>
+              <a href="{% url 'postad' %}" class="text-reset">Post an Ad</a>
+            </p>
+            <p>
+              <a href="{% url 'ad' %}" class="text-reset">Advertise with Us</a>
+            </p>
+            <p>
+              <a href="{% url 'disclaimer' %}" class="text-reset">Disclaimer</a>
+            </p>
+            <p>
+              <a href="{% url 'faq' %}" class="text-reset">FAQ</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 35 Thorncliffe Park Dr M4H 1J3 Toronto Ontario - Canada.</p>
+            <p>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                triomarketplace@gmail.com
+            </p>
+            <p><i class="fa fa-phone" aria-hidden="true"></i> +1 (800) 203-9305</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      Copyright © : All Rights Reserved.
+    </div>
+    <!-- Copyright -->
+  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.umd.min.js"></script>
+    <!-- Footer -->
+</footer>
+
+</html>

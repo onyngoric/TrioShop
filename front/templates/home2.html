@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"  rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'front/style.css' %}">
+    <style>
+        #Jumbotron{
+            background-image: url("{% static 'front/img/banner.png' %}");
+        }
+        .topadscontainer{
+            width: 100%;
+            columns: 170px;
+            column-gap: 20px;
+            padding: 7px;
+            padding-top: 10px;
+
+        }
+        .cardhead{
+            color: rgb(245, 91, 2);
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="{% static 'front/img/tm.png' %}">
+    <title>TRIO_MARKET</title>
+</head>
+
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color: #131212;">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="{% url 'index' %}">
+            <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="eager"
+                style="margin-top: -1px;"
+            />&nbsp;&nbsp;
+            <b>TRIO MARKETPLACE</b>
+            </a>
+        
+            <!-- Toggle button -->
+            <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            </button>
+        
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                </ul>
+                <!-- Left links -->
+        
+                <div class="d-flex align-items-center">                    
+                    
+                    <a  class="btn px-3 bt-sm" href="{% url 'active_post' %}" style="color:white; background-color:rgb(204, 104, 22);" role="button">
+                        <span style="font-size: x-small;">Post Ad</span>
+                    </a>
+                                          
+                    <i class="btn-sm fa fa-user-circle dropdown-toggle px-3 me-2"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-mdb-dropdown-init
+                    data-mdb-ripple-init
+                    aria-expanded="false"
+                    aria-hidden="true" 
+                    style="font-size: 15px; color: rgb(204, 104, 22);"><em class="px-3 me-2">{{ username }}</em></i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
+                    </ul>
+                    
+
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!-- Jumbotron -->
+    <div
+    class="p-5 text-center bg-image" style="height: 300px;" id="Jumbotron">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Buy & Sell Online</h1>
+                
+                <form class="row row-cols-lg-auto g-3 align-items-center" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <div class="form-outline" >
+                            <input type="text" id="form12" name="search" class="form-control" style="background-color: #ffffff;"/>
+                            <label class="form-label" for="form12">Search</label>                            
+                        </div>                        
+                    </div>
+                    <div class="col-12">
+                    <button type="submit" value="search" class="btn btn-outline-light btn-rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</header>
+
+
+<body style="background-color: rgb(219, 212, 212);">
+    <div class="container">    
+        <!--All Links-->
+        <div class="row" style="padding-top: 10px;">
+            <div class="col-md-4">
+            <form method="POST">
+                {% csrf_token %}
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">3D Printing & Robotics</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="3D1" value="3D1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">3D Printing Technology</button>
+                            <button type="submit" name="3D2" value="3D2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Robotics</a>
+                        </div>
+                    </div> 
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Air transport</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Air1" value="Air1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Aircrafts & Airplanes</a>
+                            <button type="submit" name="Air2" value="Air2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Aircraft Dealers</a>
+                            <button type="submit" name="Air3" value="Air3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Flight Schools</a>
+                            <button type="submit" name="Air4" value="Air4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Parts, Tires & Accessories</a>
+                            <button type="submit" name="Air5" value="Air5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Rentals, Lease & Financing</a>
+                            <button type="submit" name="Air6" value="Air6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Automobile & Vehicles</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Auto1" value="Auto1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">ATVs & Snowmobiles</a>
+                            <button type="submit" name="Auto2" value="Auto2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Bikes, Boats & Watercraft</a>
+                            <button type="submit" name="Auto3" value="Auto3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cars & Heavy Trucks</a>
+                            <button type="submit" name="Auto4" value="Auto4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Damaged & Accident Vehicles</a>
+                            <button type="submit" name="Auto5" value="Auto5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Automobile Dealers</a>
+                            <button type="submit" name="Auto6" value="Auto6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Driving Schools</a>
+                            <button type="submit" name="Auto7" value="Auto7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Parts, Tires & Accessories</a>
+                            <button type="submit" name="Auto8" value="Auto8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Rentals, Lease & Financing</a>
+                            <button type="submit" name="Auto9" value="Auto9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">RoadSide Assistance</a>
+                            <button type="submit" name="Auto10" value="Auto10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Business</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Bis1" value="Bis1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Renting</a>
+                            <button type="submit" name="Bis2" value="Bis2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Opportunities</a>
+                            <button type="submit" name="Bis3" value="Bis3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cryptocurrencies</a>
+                            <button type="submit" name="Bis4" value="Bis4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Finance & Investments</a>
+                            <button type="submit" name="Bis5" value="Bis5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Franchise/ Trading</a>
+                            <button type="submit" name="Bis6" value="Bis6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Partnership & Joint Ventures</a>
+                            <button type="submit" name="Bis7" value="Bis7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Classes</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Cls1" value="Cls1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Art, Music & Dance Classes</a>
+                            <button type="submit" name="Cls2" value="Cls2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Computer - Multimedia Classes</a>
+                            <button type="submit" name="Cls3" value="Cls3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Continuing Education</a>
+                            <button type="submit" name="Cls4" value="Cls4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Language Classes</a>
+                            <button type="submit" name="Cls5" value="Cls5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Online Bootcamps & Mastermind</a>
+                            <button type="submit" name="Cls6" value="Cls6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Sports & Wellness Classes</a>
+                            <button type="submit" name="Cls7" value="Cls7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Tutoring - Private Lessons</a>
+                            <button type="submit" name="Cls8" value="Cls8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Clothing</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Clot1" value="Clot1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Baby Fashions</a>
+                            <button type="submit" name="Clot2" value="Clot2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Men's Fashions</a>
+                            <button type="submit" name="Clot3" value="Clot3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Teenage Fashions</a>
+                            <button type="submit" name="Clot4" value="Clot4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Women's Fashions</a>
+                            <button type="submit" name="Clot5" value="Clot5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Community</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Com1" value="Com1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Artists, Musicians & Bands</a>
+                            <button type="submit" name="Com2" value="Com2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Auctions / Groups</a>
+                            <button type="submit" name="Com3" value="Com3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Carpool & Rideshare</a>
+                            <button type="submit" name="Com4" value="Com4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Charity, Donate</a>
+                            <button type="submit" name="Com5" value="Com5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Community Activities</a>
+                            <button type="submit" name="Com6" value="Com6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Elderly Home Assistance</a>
+                            <button type="submit" name="Com7" value="Com7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Household Help</a>
+                            <button type="submit" name="Com8" value="Com8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Lost & Found</a>
+                            <button type="submit" name="Com9" value="Com9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Public Announcements</a>
+                            <button type="submit" name="Com10" value="Com10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Recreation</a>
+                            <button type="submit" name="Com11" value="Com11" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Construction & Farming Equipments</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Con1" value="Con1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Attachments</a>
+                            <button type="submit" name="Con2" value="Con2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Building Supplies</a>
+                            <button type="submit" name="Con3" value="Con3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Construction Equipment</a>
+                            <button type="submit" name="Con4" value="Con4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Damaged & Accident Vehicles</a>
+                            <button type="submit" name="Con5" value="Con5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Farming Equipment</a>
+                            <button type="submit" name="Con6" value="Con6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Rentals, Lease & Financing</a>
+                            <button type="submit" name="Con7" value="Con7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">RoadSide Assistance</a>
+                            <button type="submit" name="Con8" value="Con8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Trailer</a>
+                            <button type="submit" name="Con9" value="Con9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Trucks</a>
+                            <button type="submit" name="Con10" value="Con10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Electronics</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Elec1" value="Elec1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Alarms & Security Systems</a>
+                            <button type="submit" name="Elec2" value="Elec2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cameras, Camcorders & Drones</a>
+                            <button type="submit" name="Elec3" value="Elec3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Computer & Gaming</a>
+                            <button type="submit" name="Elec4" value="Elec4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Media & Streaming Equipment</a>
+                            <button type="submit" name="Elec5" value="Elec5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Projectors, Tablets & TV's</a>
+                            <button type="submit" name="Elec6" value="Elec6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+            </form>           
+            </div>
+            <div class="col-md-4">
+            <form method="POST">
+                {% csrf_token %}                
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Freelancing</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Frl1" value="Frl1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Content Creation</a>
+                            <button type="submit" name="Frl2" value="Frl2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Design & Graphics</a>
+                            <button type="submit" name="Frl3" value="Frl3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Digital Marketing</a>
+                            <button type="submit" name="Frl4" value="Frl4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Programming & APP Development</a>
+                            <button type="submit" name="Frl5" value="Frl5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Social Media Manager</a>
+                            <button type="submit" name="Frl6" value="Frl6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Video & Animation</a>
+                            <button type="submit" name="Frl7" value="Frl7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Furniture</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Fur1" value="Fur1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Beds & Mattresses</a>
+                            <button type="submit" name="Fur2" value="Fur2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Couches & Futons</a>
+                            <button type="submit" name="Fur3" value="Fur3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Dressers & Wardrobes</a>
+                            <button type="submit" name="Fur4" value="Fur4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Office Furniture</a>
+                            <button type="submit" name="Fur5" value="Fur5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Sofas, Chairs & Loveseats</a>
+                            <button type="submit" name="Fur6" value="Fur6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Tables, Recliners & Mirrors</a>
+                            <button type="submit" name="Fur7" value="Fur7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Insurance</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Ins1" value="Ins1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Auto Insurance & Financing</a>
+                            <button type="submit" name="Ins2" value="Ins2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Home Insurance</a>
+                            <button type="submit" name="Ins3" value="Ins3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Insurance Brokers / Agents</a>
+                            <button type="submit" name="Ins4" value="Ins4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Life Insurance</a>
+                            <button type="submit" name="Ins5" value="Ins5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Category Card-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Jobs</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Jbs1" value="Jbs1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Accounting & Finance</a>
+                            <button type="submit" name="Jbs2" value="Jbs2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Administrative & Clerical</a>
+                            <button type="submit" name="Jbs3" value="Jbs3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Advertising, Marketing & PR</a>
+                            <button type="submit" name="Jbs4" value="Jbs4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Agriculture & Farming</a>
+                            <button type="submit" name="Jbs5" value="Jbs5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Architect & Design</a>
+                            <button type="submit" name="Jbs6" value="Jbs6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Arts & Entertainment Jobs</a>
+                            <button type="submit" name="Jbs7" value="Jbs7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Babysitter & Nanny</a>
+                            <button type="submit" name="Jbs8" value="Jbs8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Bar/Hotel/Guesthouse</a>
+                            <button type="submit" name="Jbs9" value="Jbs9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Biotech, Science & Pharmacy</a>
+                            <button type="submit" name="Jbs10" value="Jbs10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Civil Services & Policy</a>
+                            <button type="submit" name="Jbs11" value="Jbs11" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Construction & Trades</a>
+                            <button type="submit" name="Jbs12" value="Jbs12" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Customer Service & Call Centre</a>
+                            <button type="submit" name="Jbs13" value="Jbs13" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Domestic Help</a>
+                            <button type="submit" name="Jbs14" value="Jbs14" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Driver & Security</a>
+                            <button type="submit" name="Jbs15" value="Jbs15" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Education / Training & Childcare</a>
+                            <button type="submit" name="Jbs16" value="Jbs16" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Entry level</a>
+                            <button type="submit" name="Jbs17" value="Jbs17" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">General Labor</a>
+                            <button type="submit" name="Jbs18" value="Jbs18" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Government & Public Service</a>
+                            <button type="submit" name="Jbs19" value="Jbs19" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Health Jobs</a>
+                            <button type="submit" name="Jbs20" value="Jbs20" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Health & Wellness Jobs</a>
+                            <button type="submit" name="Jbs21" value="Jbs21" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Hospitality, Tourism & Travel</a>
+                            <button type="submit" name="Jbs22" value="Jbs22" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Human Resource</a>
+                            <button type="submit" name="Jbs23" value="Jbs23" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Import & Export Jobs</a>
+                            <button type="submit" name="Jbs24" value="Jbs24" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Installation, Maintenance & Repair</a>
+                            <button type="submit" name="Jbs25" value="Jbs25" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Insurance</a>
+                            <button type="submit" name="Jbs26" value="Jbs26" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Internet</a>
+                            <button type="submit" name="Jbs27" value="Jbs27" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">IT & Engineering</a>
+                            <button type="submit" name="Jbs28" value="Jbs28" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Journalism & Media</a>
+                            <button type="submit" name="Jbs29" value="Jbs29" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Legal - Paralegal</a>
+                            <button type="submit" name="Jbs30" value="Jbs30" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Management & Executive</a>
+                            <button type="submit" name="Jbs31" value="Jbs31" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Manufacturing & Production</a>
+                            <button type="submit" name="Jbs32" value="Jbs32" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Military</a>
+                            <button type="submit" name="Jbs33" value="Jbs33" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Real Estate</a>
+                            <button type="submit" name="Jbs34" value="Jbs34" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Research & Development</a>
+                            <button type="submit" name="Jbs35" value="Jbs35" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Restaurants</a>
+                            <button type="submit" name="Jbs36" value="Jbs36" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Retail & Wholesale</a>
+                            <button type="submit" name="Jbs37" value="Jbs37" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Sales</a>
+                            <button type="submit" name="Jbs38" value="Jbs38" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Shipping & Distribution</a>
+                            <button type="submit" name="Jbs39" value="Jbs39" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Social Work & Nonprofit</a>
+                            <button type="submit" name="Jbs40" value="Jbs40" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Teaching</a>
+                            <button type="submit" name="Jbs41" value="Jbs41" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Transportation & Logistics</a>
+                            <button type="submit" name="Jbs42" value="Jbs42" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Warehouse/Storage</a>
+                            <button type="submit" name="Jbs43" value="Jbs43" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Work From Home</a>
+                            <button type="submit" name="Jbs44" value="Jbs44" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Matrimonial</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Mat1" value="Mat1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Bride's Wear</a>
+                            <button type="submit" name="Mat2" value="Mat2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Groom's Wear</a>
+                            <button type="submit" name="Mat3" value="Mat3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Services</a>
+                            <button type="submit" name="Mat4" value="Mat4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Wedding Products, Accessories</a>
+                            <button type="submit" name="Mat5" value="Mat5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Pets</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Pts1" value="Pts1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Equipment & Accessories</a>
+                            <button type="submit" name="Pts2" value="Pts2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Missing Pets</a>
+                            <button type="submit" name="Pts3" value="Pts3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Pets for sale</a>
+                            <button type="submit" name="Pts4" value="Pts4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+            </form>
+            </div>
+            <div class="col-md-4">
+            <form method="POST">
+                {% csrf_token %}
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Real Estate, Housing & Rentals</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">                            
+                            <button type="submit" name="Hse1" value="Hse1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Agencies / Brokers & Builders</a>
+                            <button type="submit" name="Hse2" value="Hse2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Apartments For Rent & Lease</a>
+                            <button type="submit" name="Hse3" value="Hse3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Apartments For Sale</a>
+                            <button type="submit" name="Hse4" value="Hse4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cottages For Sale</a>
+                            <button type="submit" name="Hse5" value="Hse5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Duplex & Triplex For Sale</a>
+                            <button type="submit" name="Hse6" value="Hse6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Farmland For Sale</a>
+                            <button type="submit" name="Hse7" value="Hse7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Foreclosure Listings</a>
+                            <button type="submit" name="Hse8" value="Hse8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Homes For Sale</a>
+                            <button type="submit" name="Hse9" value="Hse9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Investment Properties</a>
+                            <button type="submit" name="Hse10" value="Hse10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Lands & Plots For Sale</a>
+                            <button type="submit" name="Hse11" value="Hse11" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Mobile Homes For Sale</a>
+                            <button type="submit" name="Hse12" value="Hse12" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Multiplex & Quadruplex For Sale</a>
+                            <button type="submit" name="Hse13" value="Hse13" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">New Property Developments</a>
+                            <button type="submit" name="Hse14" value="Hse14" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Open House Listings</a>
+                            <button type="submit" name="Hse15" value="Hse15" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Parking Spot for Rent</a>
+                            <button type="submit" name="Hse16" value="Hse16" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Real Estate Agents</a>
+                            <button type="submit" name="Hse17" value="Hse17" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Residential Property Listing</a>
+                            <button type="submit" name="Hse18" value="Hse18" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Rooms for Rent / Sublet</a>
+                            <button type="submit" name="Hse19" value="Hse19" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Shops For Rent / Lease</a>
+                            <button type="submit" name="Hse20" value="Hse20" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Vacation Rentals</a>
+                            <button type="submit" name="Hse21" value="Hse21" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Sales</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Sl1" value="Sl1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Clearance & Discount Sale</a>
+                            <button type="submit" name="Sl2" value="Sl2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Free For Pickup</a>
+                            <button type="submit" name="Sl3" value="Sl3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Garage & Moving Sale</a>
+                            <button type="submit" name="Sl4" value="Sl4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Services</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Srv1" value="Srv1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Architects & Interior Designers</a>
+                            <button type="submit" name="Srv2" value="Srv2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Astrology, Numerology & Vastu</a>
+                            <button type="submit" name="Srv3" value="Srv3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Child Care</a>
+                            <button type="submit" name="Srv4" value="Srv4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cleaning / Maids</a>
+                            <button type="submit" name="Srv5" value="Srv5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Computer & Consulting</a>
+                            <button type="submit" name="Srv6" value="Srv6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Courier Service & Cargo</a>
+                            <button type="submit" name="Srv7" value="Srv7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Electrician / Handyman</a>
+                            <button type="submit" name="Srv8" value="Srv8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Event Services</a>
+                            <button type="submit" name="Srv9" value="Srv9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">General Contractors</a>
+                            <button type="submit" name="Srv10" value="Srv10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Gifts, Flower Delivery & Cakes</a>
+                            <button type="submit" name="Srv11" value="Srv11" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Handyman</a>
+                            <button type="submit" name="Srv12" value="Srv12" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Health, Beauty & Fitness</a>
+                            <button type="submit" name="Srv13" value="Srv13" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Home Mortgage & Improvements</a>
+                            <button type="submit" name="Srv14" value="Srv14" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">House Keeping / Landscaping</a>
+                            <button type="submit" name="Srv15" value="Srv15" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Language Translation</a>
+                            <button type="submit" name="Srv16" value="Srv16" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Lawyers, Advocates & Legal</a>
+                            <button type="submit" name="Srv17" value="Srv17" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Limousine</a>
+                            <button type="submit" name="Srv18" value="Srv18" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Moving & Storage Services</a>
+                            <button type="submit" name="Srv19" value="Srv19" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Music</a>
+                            <button type="submit" name="Srv20" value="Srv20" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Packers & Movers</a>
+                            <button type="submit" name="Srv21" value="Srv21" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Pest Control</a>
+                            <button type="submit" name="Srv22" value="Srv22" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Photography & Videography</a>
+                            <button type="submit" name="Srv23" value="Srv23" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Plumbing</a>
+                            <button type="submit" name="Srv24" value="Srv24" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Recycling</a>
+                            <button type="submit" name="Srv25" value="Srv25" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Restaurants & Food Joints</a>
+                            <button type="submit" name="Srv26" value="Srv26" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Roofing / Repair</a>
+                            <button type="submit" name="Srv27" value="Srv27" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Scrap & Junk Removal</a>
+                            <button type="submit" name="Srv28" value="Srv28" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Tax</a>
+                            <button type="submit" name="Srv29" value="Srv29" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Web & Graphic Design</a>
+                            <button type="submit" name="Srv30" value="Srv30" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Softwares</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Sftwr1" value="Sftwr1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Windows</a>
+                            <button type="submit" name="Sftwr2" value="Sftwr2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Mac</a>
+                            <button type="submit" name="Sftwr3" value="Sftwr3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Open Source</a>
+                            <button type="submit" name="Sftwr4" value="Sftwr4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Space & Astronomy</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Sp1" value="Sp1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Equipments</a>
+                            <button type="submit" name="Sp2" value="Sp2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Jobs</a>
+                            <button type="submit" name="Sp3" value="Sp3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Missions</a>
+                            <button type="submit" name="Sp4" value="Sp4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Spacecraft</a>
+                            <button type="submit" name="Sp5" value="Sp5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Tickets</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Tkt1" value="Tkt1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Cinema / Theatre / Ballet</a>
+                            <button type="submit" name="Tkt2" value="Tkt2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Discounts / Coupons</a>
+                            <button type="submit" name="Tkt3" value="Tkt3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Sports / Shows / Tickets</a>
+                            <button type="submit" name="Tkt4" value="Tkt4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Other Tickets</a>
+                            <button type="submit" name="Tkt5" value="Tkt5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+                <!--Card end-->
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="cardhead">Travel, Holiday & Leisure</h5></div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <button type="submit" name="Trvl1" value="Trvl1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Bus & Train Tickets</a>
+                            <button type="submit" name="Trvl2" value="Trvl2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Hotels & Resorts</a>
+                            <button type="submit" name="Trvl3" value="Trvl3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Taxi & Bus Hire</a>
+                            <button type="submit" name="Trvl4" value="Trvl4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Tour Packages</a>
+                            <button type="submit" name="Trvl5" value="Trvl5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Travel Agents</a>
+                            <button type="submit" name="Trvl6" value="Trvl6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Others...</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Card end-->
+            </div>
+        </div>
+        <!--All links-->
+    </form>
+    </div>
+</body>
+<!-- Footer -->
+<footer class="text-center text-lg-start text-muted" style="background-color: #131212; color: #ffffff;">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/Triomarketplace" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/MarketplaceTrio" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCkss9bFS7Wgi3m9yZvTtk1w" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.pinterest.ca/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-pinterest" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.tiktok.com/@triomarketplace" target="_blank" class="me-4 text-reset">
+            <img
+            src="{% static 'front/img/tiktok.png' %}"
+            height="15"
+            alt="Trio Logo"
+            loading="lazy"
+            style="margin-top: -1px;"
+            />
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="lazy"
+                style="margin-top: -1px;"
+                />Trio MarketPlace
+            </h6>
+            <p>
+                Trio Marketplace Corporation (TMP) is an Online Classified Advertisement website with a sole purpose of bringing a fresh look at the current industry standards. Trio Marketplace Corporation is a federal incorporation registered under the Canada Business Corporations Act (CBCA) with its headquarters in Toronto, Ontario.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              About Us
+            </h6>
+            <p>
+              <a href="{% url 'hiw' %}" class="text-reset">How it works</a>
+            </p>
+            <p>
+              <a href="{% url 'terms' %}" class="text-reset">Terms of Service</a>
+            </p>
+            <p>
+              <a href="{% url 'privacy' %}" class="text-reset">Privacy Policy</a>
+            </p>
+            <p>
+              <a href="{% url 'cookie' %}" class="text-reset">Cookie Policy</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Quick links
+            </h6>
+            <p>
+              <a href="{% url 'postad' %}" class="text-reset">Post an Ad</a>
+            </p>
+            <p>
+              <a href="{% url 'ad' %}" class="text-reset">Advertise with Us</a>
+            </p>
+            <p>
+              <a href="{% url 'disclaimer' %}" class="text-reset">Disclaimer</a>
+            </p>
+            <p>
+              <a href="{% url 'faq' %}" class="text-reset">FAQ</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 35 Thorncliffe Park Dr M4H 1J3 Toronto Ontario - Canada.</p>
+            <p>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                triomarketplace@gmail.com
+            </p>
+            <p><i class="fa fa-phone" aria-hidden="true"></i> +1 (800) 203-9305</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      Copyright © : All Rights Reserved.
+    </div>
+    <!-- Copyright -->
+  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.umd.min.js"></script>
+    <!-- Footer -->
+</footer>
+
+</html>

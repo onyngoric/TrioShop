@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"  rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'front/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'front/img/tm.png' %}">
+    <title>TRIO_MARKET</title>
+    <style>
+        .sm-menu {
+            font-size: 12px !important;
+        }
+    </style>
+    
+</head>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color: #131212;">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            {% if username %}
+            <a class="navbar-brand me-2" href="{% url 'index' %}">            
+            <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="lazy"
+                style="margin-top: -1px;"
+            />&nbsp;&nbsp;
+            <b>TRIO MARKETPLACE</b>
+            </a>
+            {% else %}
+            <a class="navbar-brand me-2" href="{% url 'home' %}">            
+                <img
+                    src="{% static 'front/img/tm.png' %}"
+                    height="50"
+                    alt="Trio Logo"
+                    loading="lazy"
+                    style="margin-top: -1px;"
+                />&nbsp;&nbsp;
+                <b>TRIO MARKETPLACE</b>
+            </a>
+            {% endif %}
+        
+            <!-- Toggle button -->
+            <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            </button>
+        
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                </ul>
+                <!-- Left links -->
+        
+                <div class="d-flex align-items-center">                    
+                    
+                    <a  class="btn px-3 bt-sm" href="{% url 'active_post' %}" style="color:white; background-color:rgb(204, 104, 22);" role="button">
+                        <span style="font-size: x-small;">Post Ad</span>
+                    </a>
+                    {% if username %}                     
+                    <i class="btn-sm fa fa-user-circle dropdown-toggle px-3 me-2"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-mdb-dropdown-init
+                    data-mdb-ripple-init
+                    aria-expanded="false"
+                    aria-hidden="true" 
+                    style="font-size: 15px; color: rgb(204, 104, 22);"><em class="px-3 me-2">{{ username }}</em></i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
+                    </ul>
+                    {% else %}
+                    <a role="button" href="{% url 'login' %}" class="btn btn-link px-3 me-2">
+                        <span style="font-size: x-small;">Login</span>
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<body style="background-color: rgb(219, 212, 212);">
+    <div class="container">
+        <!--Top section Header-->
+        <form method="POST" action="view">
+            {% csrf_token %}
+            <input type="hidden" name="ad_categ" value="{{ ad.category }}">
+            <div class="row" style="padding-top: 10px; padding-bottom: 10px; background-color: rgb(165, 164, 162);">
+            <div class="col-md-6 col-sm-6 col-6" style="display: flex; justify-content: center;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter by Region
+                </button>
+                <ul class="dropdown-menu sm-menu" style="padding: 10px;">
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r1" value="r1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Alberta</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r2" value="r2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">British Columbia</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r3" value="r3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Manitoba</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r4" value="r4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">New Brunswick</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r5" value="r5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Newfoundland & Labrador</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r6" value="r6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">NorthWest Territories</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r7" value="r7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Nova Scotia</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r8" value="r8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Nuna Vut</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r9" value="r9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Ontario</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r10" value="r10" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Prince Edward Island</button>
+                     </li>
+                     <li>
+                        <button type="submit" style="font-size: x-small;" name="r11" value="r11" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Quebec</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r12" value="r12" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Saskatchewan</button>
+                     </li>
+                     <li>
+                        <button type="submit"  style="font-size: x-small;" name="r13" value="r13" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Tukon Territory</button>
+                     </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-66 col-6" style="display: flex; justify-content: center;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter by Price
+                </button>
+                <ul class="dropdown-menu sm-menu" style="padding: 10px;">
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p1" value="p1" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">Any</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p2" value="p2" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$0 - $99</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p3" value="p3" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$100 - $199</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p4" value="p4" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$200 - $299</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p5" value="p5" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$300 - $399</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p6" value="p6" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$400 - $499</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p7" value="p7" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$500 - $999</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p8" value="p8" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">$1000 - $9999</button>
+                    </li>
+                    <li>
+                        <button type="submit" style="font-size: x-small;" name="p9" value="p9" class="btn btn-light list-group-item list-group-item-action" data-mdb-ripple-init data-mdb-ripple-color="dark">More than $10000</button>
+                    </li>                    
+                </ul>
+            </div>
+        </div>
+        </form>
+        <!--End of Top Section header-->
+        
+        <!--Product Cards-->
+        <div style="padding-top: 10px;">
+            <div class="row">
+                <!--start loop here-->
+                {% if ad %}
+                {% for ad in ad %}                
+                <div class="col-md-3 col-sm-6 mb-3">                    
+                    <div style="padding-bottom: 10px;">
+                        <div class="card" style="width: 15rem;">
+
+                            
+                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
+                                <div class="carousel-inner">
+                                    {% for img in ad.adimages_set.all %}
+                                    <div class="carousel-item active">
+                                        <img src="{{ img.media.url }}" class="d-block w-100" style="object-fit: contain; width: 12rem; height: 12rem;" alt="ad_image"/>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">{{ ad.title }}</h5><span class="badge rounded-pill badge-success">$ {{ ad.price }}</span>
+                              <p class="long-text" style="font-size: small;">{{ ad.description }}</p>
+                                <form method="POST" action="view">
+                                    {% csrf_token %}
+                                    <input name="ad_id" type="hidden" value="{{ ad.id }}">
+                                    <input type="hidden" name="ad_categ" value="{{ ad.category }}">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <button type="submit" name="more" value="more" class="btn btn-outline-warning btn-rounded btn-sm">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                <small>See More...</small>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" name="chat" value="chat" class="btn btn-success btn-floating" data-mdb-ripple-init>
+                                                <i class="fa fa-comments-o fa-lg" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>                                    
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <script>
+                    var para = document.getElementsByClassName("long-text")[0];
+                    var text = para.innerHTML;
+                    para.innerHTML = "";
+                    var words = text.split(" ");
+                    for (i = 0; i < 5; i++) {
+                    para.innerHTML += words[i] + " ";
+                    }
+                    para.innerHTML += "...";
+                </script>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-warning" role="alert"><i style="font-size: 24px;" class="fa fa-exclamation-triangle pull-left"></i>                        
+                    <em>No ads Available at the moment!</em>
+                </div>
+                {% endif %}
+                <!--end loop here-->
+            </div>
+            
+            
+            
+            
+        </div>
+        <!--EndCard-->
+        
+    </div>
+    
+    
+</body><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- Footer -->
+<footer class="text-center text-lg-start text-muted" style="background-color: #131212; color: #ffffff;">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/Triomarketplace" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/MarketplaceTrio" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCkss9bFS7Wgi3m9yZvTtk1w" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.pinterest.ca/triomarketplace/" target="_blank" class="me-4 text-reset">
+            <i class="fa fa-pinterest" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.tiktok.com/@triomarketplace" target="_blank" class="me-4 text-reset">
+            <img
+            src="{% static 'front/img/tiktok.png' %}"
+            height="15"
+            alt="Trio Logo"
+            loading="lazy"
+            style="margin-top: -1px;"
+            />
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+                <img
+                src="{% static 'front/img/tm.png' %}"
+                height="50"
+                alt="Trio Logo"
+                loading="lazy"
+                style="margin-top: -1px;"
+                />Trio MarketPlace
+            </h6>
+            <p>
+                Trio Marketplace Corporation (TMP) is an Online Classified Advertisement website with a sole purpose of bringing a fresh look at the current industry standards. Trio Marketplace Corporation is a federal incorporation registered under the Canada Business Corporations Act (CBCA) with its headquarters in Toronto, Ontario.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              About Us
+            </h6>
+            <p>
+              <a href="{% url 'hiw' %}" class="text-reset">How it works</a>
+            </p>
+            <p>
+              <a href="{% url 'terms' %}" class="text-reset">Terms of Service</a>
+            </p>
+            <p>
+              <a href="{% url 'privacy' %}" class="text-reset">Privacy Policy</a>
+            </p>
+            <p>
+              <a href="{% url 'cookie' %}" class="text-reset">Cookie Policy</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Quick links
+            </h6>
+            <p>
+              <a href="{% url 'postad' %}" class="text-reset">Post an Ad</a>
+            </p>
+            <p>
+              <a href="{% url 'ad' %}" class="text-reset">Advertise with Us</a>
+            </p>
+            <p>
+              <a href="{% url 'disclaimer' %}" class="text-reset">Disclaimer</a>
+            </p>
+            <p>
+              <a href="{% url 'faq' %}" class="text-reset">FAQ</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 35 Thorncliffe Park Dr M4H 1J3 Toronto Ontario - Canada.</p>
+            <p>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                triomarketplace@gmail.com
+            </p>
+            <p><i class="fa fa-phone" aria-hidden="true"></i> +1 (800) 203-9305</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      Copyright © : All Rights Reserved.
+    </div>
+    <!-- Copyright -->
+  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.umd.min.js"></script>
+    <!-- Footer -->
+</footer>
+
+</html>

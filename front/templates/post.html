@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"  rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'front/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'front/img/tm.png' %}">
+    <title>TRIO_MARKET</title>
+    <style>
+      .decribeit{
+        width: 100%;
+        min-height: 35px;
+        outline: none;
+        resize: none;
+        border: 1px solid #000000;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding-left: 10px;
+      }
+      .pics{
+        border: none;
+        background-color: none;
+        background: none;
+      }
+      .inbox{
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding-left: 10px;
+        width: 100%;
+      }
+    </style>
+</head>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color: #131212;">
+      <!-- Container wrapper -->
+      <div class="container">
+          <!-- Navbar brand -->
+          <a class="navbar-brand me-2" href="{% url 'index' %}">
+          <img
+              src="{% static 'front/img/tm.png' %}"
+              height="50"
+              alt="Trio Logo"
+              loading="lazy"
+              style="margin-top: -1px;"
+          />&nbsp;&nbsp;
+          <b>TRIO MARKETPLACE</b>
+          </a>
+      
+          <!-- Toggle button -->
+          <button
+          data-mdb-collapse-init
+          class="navbar-toggler"
+          type="button"
+          data-mdb-target="#navbarButtonsExample"
+          aria-controls="navbarButtonsExample"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+          </button>
+      
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarButtonsExample">
+              <!-- Left links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <!-- Left links -->
+      
+              <div class="d-flex align-items-center">
+                
+                  <i class="btn-sm fa fa-user-circle dropdown-toggle px-3 me-2"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-mdb-dropdown-init
+                  data-mdb-ripple-init
+                  aria-expanded="false"
+                  aria-hidden="true" 
+                  style="font-size: 15px; color: rgb(204, 104, 22);"><em class="px-3 me-2">{{ username }}</em></i>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
+                  </ul>
+                  
+
+              </div>
+          </div>
+          <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<body style="background-color: rgb(219, 212, 212);">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <!--Messages-->
+          {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success" role="alert"><i style="font-size: 24px;" class="fa fa-check-circle pull-left"></i>                        
+                        <em>{{ message }}</em>
+                    </div>
+                {% endif %}
+                {% if message.tags == 'warning' %}
+                    <div class="alert alert-warning" role="alert"><i style="font-size: 24px;" class="fa fa-exclamation-triangle pull-left"></i>                        
+                        <em>{{ message }}</em>
+                    </div>
+                {% endif %}
+            {% endfor %}
+          {% endif %}
+          <!--Product Cards-->
+          <br>
+          <div class="card" style="padding: 20px;">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <!--Section one-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">1.</span>Ad details</p>
+                <hr>
+                <br>
+                <!--Form Inputs-->
+                <div class="form-outline mb-4">
+                  <label class="form-label">{{ form1.title.label }}<span class="badge rounded-pill badge-danger">*</span></label> <!--dropdown list-->
+                  {{ form1.title }}
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label">{{ form1.category.label }}<span class="badge rounded-pill badge-danger">*</span></label> <!--dropdown list-->
+                  {{ form1.category }}
+                </div>
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example3">{{ form1.condition.label }}</label> <!--dropdown list-->
+                  {{ form1.condition }}
+                </div>
+                
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example4">{{ form1.description.label }}<span class="badge rounded-pill badge-danger">*</span></label><br>
+                  {{ form1.description }}
+                </div>
+                <!--Delivery section-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">2.</span>Delivery</p>
+                <hr>
+                <br>
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example5">{{ form1.delivery.label }}</label> <!--dropdown list-->
+                  {{ form1.delivery}}
+                </div>
+                <!--Media Section-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">3.</span>Media<span class="badge rounded-pill badge-danger">*</span></p>
+                <hr>
+                <br>
+                <!--Images Input-->
+                <div>
+                  <div class="mb-4 d-flex justify-content-center" style="font-size: 13px !important;">
+                    <p>Add an Image to attract more traffic to your Ad.</p>
+                    <!--<p> Add upto <span class="badge rounded-pill badge-success"> 5 </span> Images</p>-->
+                  </div>
+                  <div class="mb-4 d-flex justify-content-center">                    
+                      <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                      alt="example placeholder" style="width: 300px;" />
+                  </div>
+                  <div class="d-flex justify-content-center">
+                      <div class="btn btn-primary btn-rounded">
+                          {{ form2.media }} <!--select upto 5 images-->
+                      </div>
+                  </div>
+                </div>
+                <!--Section 4-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">4.</span>Location</p>
+                <hr>
+                <br>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example6">{{ form1.location.label }}<span class="badge rounded-pill badge-danger">*</span></label>
+                  {{ form1.location}}
+                </div>
+                <!--Section 5-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">5.</span>Price (Optional)</p>
+                <hr>
+                <br>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example7">{{ form1.price.label }}</label>
+                  {{ form1.price }}
+                </div>
+                <!--Section 6-->
+                <br>
+                <p><span class="badge rounded-pill badge-primary">6.</span>Payment Method (Optional)</p>
+                <hr>
+                <br>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form6Example8">{{ form1.payment.label }}</label>
+                  {{ form1.payment }}
+                </div>
+                <div class="form-outline mb-4">
+                  <input type="hidden" name="email" value="{{ email }}">
+                </div>
+                
+              
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                  <input
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    name="terms"
+                    value="1"
+                    id="registerCheck"
+                    aria-describedby="registerCheckHelpText"
+                    style="border-color: rgb(61, 61, 61);"
+                />
+                <label class="form-check-label" for="registerCheck"> Promote my Ad? </label>
+                </div>              
+                <!-- Submit button -->
+                <div class="mb-4 d-flex justify-content-center" style="font-size: 13px !important;">
+                  <p>By posting your Ad you are agreeing to our <a href="{% url 'terms' %}">policies</a> </p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Post Your Ad</button>
+            </form>
+          </div>
+          <!--EndCard-->
+        </div>
+      <div class="col-md-2"></div>
+
+    </div>    
+  </div>
+</body>
+<footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.umd.min.js"></script>
+</footer>
+
+</html>
